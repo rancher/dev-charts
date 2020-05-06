@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ $(uname -s) == 'Darwin' ]]; then 
+	echo "Please make sure you have helm and yq installed"
+	exit 0
+fi
+
 # Download helm
 if [[ -z $(command -v helm) ]] || [[ $(helm version --short) != "v3"* ]]; then
 	curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash && chmod +x /usr/local/bin/helm
