@@ -20,7 +20,6 @@ packages/${CHART_NAME}/
     templates/
     Chart.yaml
     values.yaml
-  sha256sum.txt             # sha256 checksum of all files in helm directory
 ```
 
 For **Rancher modified** charts, it should have the following tree structure
@@ -30,7 +29,6 @@ package/${CHART_NAME}/
   package.yaml              # metadata manifest containing upstream chart location, package version
   ${CHART_NAME}.patch       # patch file containing the diff between modified chart and upstream
   overlay/*                 # overlay files that needs to added on top of upstream, for example, questions.yaml
-  sha256sum.txt             # sha256 checksum for all files included in the modified helm chart
 ```
 
 A regular `package.yaml` will have the following content:
