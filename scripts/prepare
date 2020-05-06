@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
-set -x
 
 # rebase the patch with upsteam charts defined in package.yaml. Make sure patches still apply
 # for the latest upsteam charts. If there is conflits commiter should solve it.
