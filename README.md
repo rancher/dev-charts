@@ -25,7 +25,7 @@ packages/${CHART_NAME}/
 For **Rancher modified** charts, it should have the following tree structure
 
 ```text
-package/${CHART_NAME}/
+packages/${CHART_NAME}/
   package.yaml              # metadata manifest containing upstream chart location, package version
   ${CHART_NAME}.patch       # patch file containing the diff between modified chart and upstream
   overlay/*                 # overlay files that needs to added on top of upstream, for example, questions.yaml
