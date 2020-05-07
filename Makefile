@@ -19,5 +19,8 @@ validate: bootstrap
 mirror: bootstrap
 	./scripts/image-mirror
 
+clean:
+	./scripts/clean
+
 .DEFAULT_GOAL := ci
 

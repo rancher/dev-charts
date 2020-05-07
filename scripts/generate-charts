@@ -3,19 +3,18 @@ set -e
 
 add=0
 for f in packages/*; do
-	if [[ -f ${f}/package.yaml ]]; then
-		if [[ -z $CHART || $CHART == $(basename -- ${f}) ]]; then
-			mkdir -p docs/$(basename -- ${f})
-			if [[ -d ${f}/overlay ]]; then
-				cp -R ${f}/overlay/* ${f}/charts
-			fi
-			if [[ -f ${f}/package.yaml ]]; then
-				version=$(yq r ${f}/charts/Chart.yaml version)
-				packageVersion=$(yq r ${f}/package.yaml packageVersion)
-				yq w -i ${f}/charts/Chart.yaml 'version' "${version}${packageVersion}"
-			fi
-			git checkout "$(basename -- ${f})-$(yq r ${f}/charts/Chart.yaml version).tgz" || true
+	if [[ -z $CHART || $CHART == $(basename -- ${f}) ]]; then
+		mkdir -p docs/$(basename -- ${f})
+		if [[ -d ${f}/overlay ]]; then
+			cp -R ${f}/overlay/* ${f}/charts
 		fi
+		if [[ -f ${f}/package.yaml ]]; then
+			version=$(yq r ${f}/charts/Chart.yaml version)
+			packageVersion=$(yq r ${f}/package.yaml packageVersion)
+			yq w -i ${f}/charts/Chart.yaml 'version' "${version}${packageVersion}"
+		fi
+		helm package ${f}/charts --destination docs/$(basename -- ${f})
+		git checkout docs/$(basename -- ${f})/"$(basename -- ${f})-$(yq r ${f}/charts/Chart.yaml version).tgz" || true
 	fi
 done
 
