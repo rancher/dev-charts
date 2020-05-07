@@ -2,4 +2,4 @@ url: https://github.com/helm/charts.git
 subdirectory: stable/metrics-server
 type: git
 commit: 61aca68bd482406a3c34e89732a86f24794d67b1
-packageVersion: 2.11.1 
+packageVersion: 00
