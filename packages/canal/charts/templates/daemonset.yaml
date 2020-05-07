@@ -104,7 +104,7 @@ spec:
               value: {{ .Values.calico.datastoreType | quote }}
             # Configure route aggregation based on pod CIDR.
             - name: USE_POD_CIDR
-              value: "true"
+              value: {{ .Values.calico.usePodCIDR | quote }}
             # Wait for the datastore.
             - name: WAIT_FOR_DATASTORE
               value: {{ .Values.calico.waitForDatastore | quote }}
@@ -135,7 +135,7 @@ spec:
               value: "true"
             # Set Felix endpoint to host default action to ACCEPT.
             - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
-              value: "ACCEPT"
+              value: {{ .Values.calico.felixDefaultEndpointToHostAction | quote }}
             # Disable IPv6 on Kubernetes.
             - name: FELIX_IPV6SUPPORT
               value: {{ .Values.calico.felixIpv6Support | quote }}

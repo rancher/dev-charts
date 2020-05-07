@@ -7,7 +7,7 @@ home: https://www.projectcalico.org/
 keywords:
   - canal
 sources:
-  - https://github.com/galal-hussein/rke2-charts
+  - https://github.com/rancher/dev-charts
 maintainers:
   - name: Rancher Labs
     email: charts@rancher.com
