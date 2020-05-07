@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  canal:
+  - apiVersion: v1
+    appVersion: v3.13.3
+    created: "2020-05-07T23:41:08.008182598Z"
+    description: Install Canal Network Plugin.
+    digest: 9ba7da9f35af96e1a52b993a0944c31ba34ec2e52c599bd40179ee571d17b306
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: canal
+    sources:
+    - https://github.com/rancher/dev-charts
+    urls:
+    - https://strongmonkey.github.com/k3chart/canal/canal-v3.13.3.tgz
+    version: v3.13.3
+generated: "2020-05-07T23:41:08.000486171Z"
