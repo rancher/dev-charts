@@ -80,7 +80,7 @@ up-to-date with the latest chart. It also automatically build github pages to se
 To add this repo as a helm repo, run
 
 ```text
-helm repo add https://rancher.github.io/dev-charts
+helm repo add ${repo_name} https://dev-charts.rancher.io
 ```
 
 ### Makefile
