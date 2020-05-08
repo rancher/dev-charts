@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-05-07T23:58:58.564515296Z"
+    created: "2020-05-08T00:04:29.413198553Z"
     description: Install Canal Network Plugin.
     digest: 2f681dfc435904e13ae1246bf566cfbf8f38b557e1eb1a6e12447fce8d65f83b
     home: https://www.projectcalico.org/
@@ -18,4 +18,24 @@ entries:
     urls:
     - https://dev-charts.rancher.io/canal/canal-v3.13.3.tgz
     version: v3.13.3
-generated: "2020-05-07T23:58:58.545827624Z"
+  metrics-server:
+  - apiVersion: v1
+    appVersion: 0.3.6
+    created: "2020-05-08T00:04:29.414002445Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: d711c9434f0b44f5c7560e940aa99a6a1205a0a82cb85af39726186756552796
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - https://dev-charts.rancher.io/metrics-server/metrics-server-2.11.100.tgz
+    version: 2.11.100
+generated: "2020-05-08T00:04:29.412430862Z"
