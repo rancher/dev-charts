@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-05-08T00:04:29.413198553Z"
+    created: "2020-05-08T21:13:48.284798993Z"
     description: Install Canal Network Plugin.
     digest: 2f681dfc435904e13ae1246bf566cfbf8f38b557e1eb1a6e12447fce8d65f83b
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-05-08T00:04:29.414002445Z"
+    created: "2020-05-08T21:13:48.285398689Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: d711c9434f0b44f5c7560e940aa99a6a1205a0a82cb85af39726186756552796
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -38,4 +38,27 @@ entries:
     urls:
     - https://dev-charts.rancher.io/metrics-server/metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-05-08T00:04:29.412430862Z"
+  nginx-ingress:
+  - apiVersion: v1
+    appVersion: 0.30.0
+    created: "2020-05-08T21:13:48.287291276Z"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
+    digest: 01b2974f76578004f4e77c4c528b9222afb44fe71ba976f242964d0b140d17b3
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.10.0-0'
+    maintainers:
+    - name: ChiefAlexander
+    - email: Trevor.G.Wood@gmail.com
+      name: taharah
+    name: nginx-ingress
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - https://dev-charts.rancher.io/nginx-ingress/nginx-ingress-1.36.300.tgz
+    version: 1.36.300
+generated: "2020-05-08T21:13:48.284229697Z"
