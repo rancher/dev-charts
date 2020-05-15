@@ -97,6 +97,8 @@ spec:
         # container programs network policy and routes on each
         # host.
         - name: calico-node
+          command:
+          - "start_runit"
           image: {{ .Values.calico.nodeImage }}:{{ .Values.calico.imageTag }}
           env:
             # Use Kubernetes API as the backing datastore.
