@@ -16,7 +16,6 @@ for f in packages/*; do
 				fields='1'
 			fi
 			rm -rf ${f}/charts
-			rm -rf ${f}/upstream
 			mkdir -p ${f}/charts
 			if [[ $type == 'git' ]]; then
 				mkdir -p /tmp/tmp-charts
@@ -30,7 +29,6 @@ for f in packages/*; do
 			else
 				curl -sLf ${url} | tar xvzf - -C ${f}/charts --strip ${fields} ${subdirectory} > /dev/null 2>&1
 			fi
-			cp -r ${f}/charts ${f}/upstream
 			for file in $(find ./${f} -type f -name "*.patch"); do
 				basename=$(basename -- ${file})
 				patch -p3 -d ${f}/charts < ${f}/$basename
