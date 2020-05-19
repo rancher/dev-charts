@@ -1,10 +1,10 @@
 ---
 
 # image for kubeproxy
-image: k8s.gcr.io/kube-proxy:v1.18.2
+image: ranchertest/kube-proxy
 
-# Path to the file containing Azure container registry configuration information.
-azureContainerRegistryConfig:
+# image tag for kubeproxy
+imageTag: v1.18.2
 
 # The IP address for the proxy server to serve on 
 # (set to '0.0.0.0' for all IPv4 interfaces and '::' for all IPv6 interfaces)
@@ -17,7 +17,7 @@ cleanup:
 # When configured, traffic sent to a Service cluster IP from outside this range 
 # will be masqueraded and traffic sent from pods to an external 
 # LoadBalancer IP will be directed to the respective cluster IP instead
-clusterCIDR: 
+clusterCIDR: 10.42.0.0/16
 
 # The path to the configuration file.
 config: 
