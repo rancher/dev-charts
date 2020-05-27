@@ -169,7 +169,7 @@ clientConnection:
   # QPS to use while talking with kubernetes apiserver
   qps: 5
   # Path to kubeconfig file with authorization information (the master location is set by the master flag).
-  kubeconfig: /var/lib/kube-proxy/kubeconfig.conf
+  kubeconfig: /var/lib/rancher/rke2/agent/kubeproxy.kubeconfig
 
 # Maximum number of seconds between log flushes
 logFlushFrequency: 5s
