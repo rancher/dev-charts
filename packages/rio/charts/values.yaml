@@ -20,3 +20,4 @@ features:
 
 gatewayServiceName: istio-ingressgateway
 gatewayServiceNamespace: istio-system
+addRemoteAddressFilter: true
