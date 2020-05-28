@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-05-28T16:35:30.7555078Z"
+    created: "2020-05-28T17:10:10.221016387Z"
     description: Install Canal Network Plugin.
     digest: 536a80f13a72849bdcec79bcf163cbc2f5f2e9daf2a5aa149887af15e08d6a03
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-05-28T16:35:30.757912024Z"
+    created: "2020-05-28T17:10:10.262990947Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 0111f1cfb2e4bb2ccc4bf20194e6006fe6aac644c4958c8b758fdf23b1e06097
@@ -48,7 +48,7 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-05-28T16:35:30.756776313Z"
+    created: "2020-05-28T17:10:10.261626874Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 38662943bf8639f15d5a83ce20b60f826b7e126ac05ee98b40ad4f58ebff3b6d
@@ -76,7 +76,7 @@ entries:
   kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.2
-    created: "2020-05-28T16:35:30.765914406Z"
+    created: "2020-05-28T17:10:10.263938528Z"
     description: Install Kube Proxy.
     digest: 75e3807bcbcf27ab81befb5f60cc7796760cc1a734a3f665a068c414252963d3
     keywords:
@@ -93,7 +93,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-05-28T16:35:30.766757914Z"
+    created: "2020-05-28T17:10:10.264710712Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: d711c9434f0b44f5c7560e940aa99a6a1205a0a82cb85af39726186756552796
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -113,7 +113,7 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-05-28T16:35:30.76931604Z"
+    created: "2020-05-28T17:10:10.26680517Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 01b2974f76578004f4e77c4c528b9222afb44fe71ba976f242964d0b140d17b3
@@ -136,12 +136,12 @@ entries:
   rio:
   - apiVersion: v1
     appVersion: 0.8.0-rc1
-    created: "2020-05-28T16:35:30.769729644Z"
+    created: "2020-05-28T17:10:10.267199763Z"
     description: The application deployment engine for Kubernetes
-    digest: a905f69dc70fbb0c18a15f22702438dcd70df34a8678f6dcea0cfa6c927a0c11
+    digest: 0dbe8a246e4e875d6dd0b21cdfa62be2ec5e30ace7fafc3dd15e60a9c42f5ad3
     home: https://rio.io
     name: rio
     urls:
     - https://dev-charts.rancher.io/rio/rio-0.1.0.tgz
     version: 0.1.0
-generated: "2020-05-28T16:35:30.754410489Z"
+generated: "2020-05-28T17:10:10.219995107Z"
