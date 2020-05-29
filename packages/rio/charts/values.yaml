@@ -10,7 +10,7 @@ debug: false            # Enable debug logging in controller
 features:
   autoscaling: true
   build: true
-  dashboard: true
+  dashboard: false
   gloo: false
   linkerd: false
   istio: true
