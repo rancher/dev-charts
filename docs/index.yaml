@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-06-01T21:44:30.928589251Z"
+    created: "2020-06-03T18:35:28.724135336Z"
     description: Install Canal Network Plugin.
     digest: 536a80f13a72849bdcec79bcf163cbc2f5f2e9daf2a5aa149887af15e08d6a03
     home: https://www.projectcalico.org/
@@ -21,10 +21,10 @@ entries:
   coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-06-01T21:44:30.931017262Z"
+    created: "2020-06-03T18:35:28.734430751Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 0111f1cfb2e4bb2ccc4bf20194e6006fe6aac644c4958c8b758fdf23b1e06097
+    digest: d103497c84aeca14a7e2e5a9e0c6d0989acbb0b8242af44383e3e663ef9058c6
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -48,7 +48,7 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-06-01T21:44:30.929812456Z"
+    created: "2020-06-03T18:35:28.725352837Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 38662943bf8639f15d5a83ce20b60f826b7e126ac05ee98b40ad4f58ebff3b6d
@@ -76,7 +76,7 @@ entries:
   kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.2
-    created: "2020-06-01T21:44:30.932143066Z"
+    created: "2020-06-03T18:35:28.735538752Z"
     description: Install Kube Proxy.
     digest: 75e3807bcbcf27ab81befb5f60cc7796760cc1a734a3f665a068c414252963d3
     keywords:
@@ -93,9 +93,9 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-06-01T21:44:30.93296247Z"
+    created: "2020-06-03T18:35:28.736353753Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: d711c9434f0b44f5c7560e940aa99a6a1205a0a82cb85af39726186756552796
+    digest: a3f39b9501069cf2f0054db291c186262174c1054a1a9df97c37b369c9056beb
     home: https://github.com/kubernetes-incubator/metrics-server
     keywords:
     - metrics-server
@@ -113,7 +113,7 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-06-01T21:44:30.935489481Z"
+    created: "2020-06-03T18:35:28.738925157Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 01b2974f76578004f4e77c4c528b9222afb44fe71ba976f242964d0b140d17b3
@@ -136,7 +136,7 @@ entries:
   rio:
   - apiVersion: v1
     appVersion: 0.8.0-rc1
-    created: "2020-06-01T21:44:30.935924583Z"
+    created: "2020-06-03T18:35:28.739392058Z"
     description: The application deployment engine for Kubernetes
     digest: 73ddd91cf3eaf8f4eee59a137cb3112a8fc5553b9cf383e7653a6a8fa6cf108e
     home: https://rio.io
@@ -144,4 +144,4 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rio/rio-0.1.0.tgz
     version: 0.1.0
-generated: "2020-06-01T21:44:30.927523046Z"
+generated: "2020-06-03T18:35:28.700727102Z"
