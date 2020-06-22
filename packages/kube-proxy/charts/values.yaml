@@ -4,7 +4,7 @@
 image: ranchertest/kube-proxy
 
 # image tag for kubeproxy
-imageTag: v1.18.2
+imageTag: v1.18.4
 
 # The IP address for the proxy server to serve on 
 # (set to '0.0.0.0' for all IPv4 interfaces and '::' for all IPv6 interfaces)
