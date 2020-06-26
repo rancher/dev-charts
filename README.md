@@ -75,6 +75,10 @@ The step includes:
 This repo provides a [workflow](./.github/workflows) that automatically uploads patch files and tarball of charts. Commit will only need to update `package/${chart-name}/charts` and make sure patches are 
 up-to-date with the latest chart. It also automatically build github pages to serve `index.yaml` and artifacts of charts.
 
+### Override existing Chart
+
+By defauly CI script doesn't allow changes to be made against existing chart. In order to make changes you have to bump chart version. There is a backdoor method to make changes to your existing chart without having to bump version. You can delete the tar.gz file you want to override and commit the change. Here is an example of [commit](https://github.com/rancher/dev-charts/commit/8be888076487e23a24121a532d25b9bf9ea936f3).
+
 ### Helm repo index
 
 To add this repo as a helm repo, run
