@@ -83,6 +83,14 @@ To add this repo as a helm repo, run
 helm repo add ${repo_name} https://dev-charts.rancher.io
 ```
 
+To use a forked version of this chart repo, you can try either of these:
+
+1. If you just need to test chart tar.gz file, you can run `make CHART=${name} charts` to generate tar.gz files. It will be generated under `docs/${chart_name}`.
+
+2. You can also setup github page to serve your tar.gz files on your forked repo. Github pages usually requires you to have this set up on [specific branches](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#choosing-a-publishing-source). 
+
+3. You can directly add `https://github.com/rancher/dev-charts` into rancher catalog. In order to show all the charts you have to run `make CHART=${chart_name} prepare` and make sure there is `chart-original` folder on each chart folder if your chart relies on a upstream chart.
+
 ### Makefile
 
 `make bootstrap`: 
