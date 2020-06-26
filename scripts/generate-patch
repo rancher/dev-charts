@@ -27,7 +27,7 @@ for f in packages/*; do
 				curl -sLf ${url} | tar xvzf - -C ${f}/charts-original --strip ${fields} ${subdirectory} > /dev/null 2>&1
 			fi
 			if [[ -d ${f}/charts ]]; then
-				diff -uNr ${f}/charts-original ${f}/charts > ${f}/$(basename -- ${f}).patch || true
+				diff -x *.tgz -uNr ${f}/charts-original ${f}/charts > ${f}/$(basename -- ${f}).patch || true
 			fi
 			rm -rf ${f}/charts-original
 		fi
