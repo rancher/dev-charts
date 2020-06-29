@@ -33,6 +33,10 @@ for f in packages/*; do
 				basename=$(basename -- ${file})
 				patch -p3 -d ${f}/charts < ${f}/$basename
 			done
+			pwd=$(pwd)
+			cd ${f}/charts
+			helm dependency update
+			cd $pwd
 		fi
   fi
 done
