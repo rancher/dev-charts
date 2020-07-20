@@ -118,14 +118,137 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/tem
  {{- if .Values.prometheus.prometheusSpec.nodeSelector }}
    nodeSelector:
  {{ toYaml .Values.prometheus.prometheusSpec.nodeSelector | indent 4 }}
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/templates/rancher-monitoring/grafana-configmap-roles.yaml packages/rancher-monitoring/charts/templates/rancher-monitoring/grafana-configmap-roles.yaml
+--- packages/rancher-monitoring/charts-original/templates/rancher-monitoring/grafana-configmap-roles.yaml
++++ packages/rancher-monitoring/charts/templates/rancher-monitoring/grafana-configmap-roles.yaml
+@@ -0,0 +1,22 @@
++{{- if .Values.monitoringRoles }}
++{{- if and .Values.monitoringRoles.create .Values.grafana.enabled }}
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: grafana-config-edit
++  labels: {{ include "prometheus-operator.labels" . | nindent 4 }}
++rules:
++- apiGroups: [""] # "" indicates the core API group
++  resources: ["configmaps", "secrets"]
++  verbs: ["*"]
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: grafana-config-view
++  labels: {{ include "prometheus-operator.labels" . | nindent 4 }}
++rules:
++- apiGroups: [""] # "" indicates the core API group
++  resources: ["configmaps", "secrets"]
++  verbs: ["get", "watch", "list"]
++{{- end }}{{- end }}
+\ No newline at end of file
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/templates/rancher-monitoring/monitoring-roles.yaml packages/rancher-monitoring/charts/templates/rancher-monitoring/monitoring-roles.yaml
+--- packages/rancher-monitoring/charts-original/templates/rancher-monitoring/monitoring-roles.yaml
++++ packages/rancher-monitoring/charts/templates/rancher-monitoring/monitoring-roles.yaml
+@@ -0,0 +1,85 @@
++{{- if .Values.monitoringRoles }}{{- if .Values.monitoringRoles.create }}
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: monitoring-admin
++  labels: {{ include "prometheus-operator.labels" . | nindent 4 }}
++  {{- if .Values.monitoringRoles.aggregateRolesForRBAC }}
++    rbac.authorization.k8s.io/aggregate-to-admin: "true"
++  {{- end }}
++rules:
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheuses"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["alertmanagers"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["servicemonitors"]
++  verbs: ["*"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["podmonitors"]
++  verbs: ["*"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheusrules"]
++  verbs: ["*"]
++- apiGroups: [""] # "" indicates the core API group
++  resources: ["configmaps", "secrets"]
++  verbs: ["*"]
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: monitoring-edit
++  labels: {{ include "prometheus-operator.labels" . | nindent 4 }}
++  {{- if .Values.monitoringRoles.aggregateRolesForRBAC }}
++    rbac.authorization.k8s.io/aggregate-to-edit: "true"
++  {{- end }}
++rules:
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheuses"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["alertmanagers"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["servicemonitors"]
++  verbs: ["*"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["podmonitors"]
++  verbs: ["*"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheusrules"]
++  verbs: ["*"]
++- apiGroups: [""] # "" indicates the core API group
++  resources: ["configmaps", "secrets"]
++  verbs: ["*"]
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: monitoring-view
++  labels: {{ include "prometheus-operator.labels" . | nindent 4 }}
++  {{- if .Values.monitoringRoles.aggregateRolesForRBAC }}
++    rbac.authorization.k8s.io/aggregate-to-view: "true"
++  {{- end }}
++rules:
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheuses"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["alertmanagers"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["servicemonitors"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["podmonitors"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: ["monitoring.coreos.com"] # "" indicates the core API group
++  resources: ["prometheusrules"]
++  verbs: ["get", "watch", "list"]
++- apiGroups: [""] # "" indicates the core API group
++  resources: ["configmaps", "secrets"]
++  verbs: ["get", "watch", "list"]
++{{- end }}{{- end }}
+\ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/values.yaml packages/rancher-monitoring/charts/values.yaml
 --- packages/rancher-monitoring/charts-original/values.yaml
 +++ packages/rancher-monitoring/charts/values.yaml
-@@ -2,13 +2,29 @@
+@@ -2,13 +2,35 @@
  # This is a YAML-formatted file.
  # Declare variables to be passed into your templates.
  
 +# Rancher Monitoring Configuration
++
++## Deploy some default ClusterRoles to allow users to interact with Prometheus CRs, ConfigMaps, and Secrets
++##
++monitoringRoles:
++  create: true
++  aggregateRolesForRBAC: false
 +
 +## Configuration for prometheus-adapter
 +## ref: https://github.com/helm/charts/tree/master/stable/prometheus-adapter
@@ -153,7 +276,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
  ## Provide a k8s version to auto dashboard import script example: kubeTargetVersionOverride: 1.16.6
  ##
-@@ -102,7 +118,7 @@
+@@ -102,7 +124,7 @@
  
    ## Deploy alertmanager
    ##
@@ -162,7 +285,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2
    ##
-@@ -409,9 +425,13 @@
+@@ -409,9 +431,13 @@
      ## Define resources requests and limits for single Pods.
      ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
      ##
@@ -179,7 +302,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
      ## Pod anti-affinity can prevent the scheduler from placing Prometheus replicas on the same node.
      ## The default value "soft" means that the scheduler should *prefer* to not schedule two replica pods onto the same node but no guarantee is provided.
-@@ -574,6 +594,19 @@
+@@ -574,6 +600,19 @@
    ##
    service:
      portName: service
@@ -199,7 +322,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## If true, create a serviceMonitor for grafana
    ##
-@@ -599,6 +632,14 @@
+@@ -599,6 +638,14 @@
      #   targetLabel: nodename
      #   replacement: $1
      #   action: replace
@@ -214,7 +337,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
  ## Component scraping the kube api server
  ##
-@@ -755,7 +796,7 @@
+@@ -755,7 +802,7 @@
  ## Component scraping the kube controller manager
  ##
  kubeControllerManager:
@@ -223,7 +346,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
    ##
-@@ -888,7 +929,7 @@
+@@ -888,7 +935,7 @@
  ## Component scraping etcd
  ##
  kubeEtcd:
@@ -232,7 +355,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## If your etcd is not deployed as a pod, specify IPs it can be found on
    ##
-@@ -948,7 +989,7 @@
+@@ -948,7 +995,7 @@
  ## Component scraping kube scheduler
  ##
  kubeScheduler:
@@ -241,7 +364,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
    ##
-@@ -1001,7 +1042,7 @@
+@@ -1001,7 +1048,7 @@
  ## Component scraping kube proxy
  ##
  kubeProxy:
@@ -250,7 +373,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
    ##
-@@ -1075,6 +1116,13 @@
+@@ -1075,6 +1122,13 @@
      create: true
    podSecurityPolicy:
      enabled: true
@@ -264,7 +387,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
  ## Deploy node exporter as a daemonset to all nodes
  ##
-@@ -1124,6 +1172,16 @@
+@@ -1124,6 +1178,16 @@
    extraArgs:
      - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+)($|/)
      - --collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs)$
@@ -281,7 +404,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
  ## Manages Prometheus and Alertmanager components
  ##
-@@ -1280,13 +1338,13 @@
+@@ -1280,13 +1344,13 @@
  
    ## Resource limits & requests
    ##
@@ -302,7 +425,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
  
    # Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico),
    # because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working
-@@ -1628,6 +1686,11 @@
+@@ -1628,6 +1692,11 @@
      ##
      externalUrl: ""
  
@@ -314,7 +437,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/val
      ## Define which Nodes the Pods are scheduled on.
      ## ref: https://kubernetes.io/docs/user-guide/node-selection/
      ##
-@@ -1802,9 +1865,13 @@
+@@ -1802,9 +1871,13 @@
  
      ## Resource limits & requests
      ##
