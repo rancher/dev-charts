@@ -1,6 +1,6 @@
-diff -uNr packages/nginx-ingress/charts-original/values.yaml packages/nginx-ingress/charts/values.yaml
---- packages/nginx-ingress/charts-original/values.yaml	1970-01-01 02:00:00.000000000 +0200
-+++ packages/nginx-ingress/charts/values.yaml	2020-06-26 20:42:28.960654880 +0200
+diff -x '*.tgz' -x '*.lock' -uNr packages/nginx-ingress/charts-original/values.yaml packages/nginx-ingress/charts/values.yaml
+--- packages/nginx-ingress/charts-original/values.yaml	1969-12-31 16:00:00.000000000 -0800
++++ packages/nginx-ingress/charts/values.yaml	2020-07-21 11:08:20.000000000 -0700
 @@ -37,7 +37,7 @@
    # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
    # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920

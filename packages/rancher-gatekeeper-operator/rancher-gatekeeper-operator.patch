@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/Chart.yaml packages/rancher-gatekeeper-operator/charts/Chart.yaml
---- packages/rancher-gatekeeper-operator/charts-original/Chart.yaml	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/Chart.yaml	2020-07-20 21:23:31.393490674 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/Chart.yaml	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/Chart.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -1,10 +1,12 @@
  apiVersion: v1
  description: A Helm chart for Gatekeeper
@@ -17,8 +17,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +annotations:
 +  io.rancher.certified: experimental
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/helm-modifications/helm-modifications.yaml packages/rancher-gatekeeper-operator/charts/helm-modifications/helm-modifications.yaml
---- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/helm-modifications.yaml	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/helm-modifications/helm-modifications.yaml	1969-12-31 17:00:00.000000000 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/helm-modifications.yaml	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/helm-modifications/helm-modifications.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,61 +0,0 @@
 -apiVersion: v1
 -kind: Service
@@ -82,8 +82,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 -          resources: HELMSUBST_DEPLOYMENT_CONTAINER_RESOURCES
 -      nodeSelector: HELMSUBST_DEPLOYMENT_POD_SCHEDULING
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/helm-modifications/kustomization.yaml packages/rancher-gatekeeper-operator/charts/helm-modifications/kustomization.yaml
---- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/kustomization.yaml	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/helm-modifications/kustomization.yaml	1969-12-31 17:00:00.000000000 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/kustomization.yaml	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/helm-modifications/kustomization.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,9 +0,0 @@
 -commonLabels:
 -  app: '{{ template "gatekeeper-operator.name" . }}'
@@ -94,9 +94,24 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 -  - _temp.yaml
 -patchesStrategicMerge:
 -  - helm-modifications.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl
+--- packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl	2020-07-21 11:08:23.000000000 -0700
+@@ -42,3 +42,11 @@
+ {{- end }}
+ app.kubernetes.io/managed-by: {{ .Release.Service }}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/allowedrepos.yaml packages/rancher-gatekeeper-operator/charts/templates/allowedrepos.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/allowedrepos.yaml	1969-12-31 17:00:00.000000000 -0700
-+++ packages/rancher-gatekeeper-operator/charts/templates/allowedrepos.yaml	2020-07-20 21:18:58.371378100 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/templates/allowedrepos.yaml	1969-12-31 16:00:00.000000000 -0800
++++ packages/rancher-gatekeeper-operator/charts/templates/allowedrepos.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -0,0 +1,35 @@
 +apiVersion: templates.gatekeeper.sh/v1beta1
 +kind: ConstraintTemplate
@@ -135,8 +150,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +        }
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/gatekeeper.yaml packages/rancher-gatekeeper-operator/charts/templates/gatekeeper.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/gatekeeper.yaml	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/templates/gatekeeper.yaml	2020-07-20 21:18:58.371378100 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/templates/gatekeeper.yaml	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/templates/gatekeeper.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -485,7 +485,7 @@
            valueFrom:
              fieldRef:
@@ -155,24 +170,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
  {{ toYaml .Values.nodeSelector | indent 8 }}
        affinity:
  {{ toYaml .Values.affinity | indent 8 }}
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl
---- packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl	2020-07-20 21:18:58.371378100 -0700
-@@ -42,3 +42,11 @@
- {{- end }}
- app.kubernetes.io/managed-by: {{ .Release.Service }}
- {{- end -}}
-+
-+{{- define "system_default_registry" -}}
-+{{- if .Values.global.systemDefaultRegistry -}}
-+{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
-+{{- else -}}
-+{{- "" -}}
-+{{- end -}}
-+{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/job-constraints-crd.yaml packages/rancher-gatekeeper-operator/charts/templates/job-constraints-crd.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/job-constraints-crd.yaml	1969-12-31 17:00:00.000000000 -0700
-+++ packages/rancher-gatekeeper-operator/charts/templates/job-constraints-crd.yaml	2020-07-20 21:18:58.371378100 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/templates/job-constraints-crd.yaml	1969-12-31 16:00:00.000000000 -0800
++++ packages/rancher-gatekeeper-operator/charts/templates/job-constraints-crd.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -0,0 +1,19 @@
 +apiVersion: batch/v1
 +kind: Job
@@ -195,8 +195,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +  backoffLimit: 1
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/requiredlabels.yaml packages/rancher-gatekeeper-operator/charts/templates/requiredlabels.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/requiredlabels.yaml	1969-12-31 17:00:00.000000000 -0700
-+++ packages/rancher-gatekeeper-operator/charts/templates/requiredlabels.yaml	2020-07-20 21:18:58.371378100 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/templates/requiredlabels.yaml	1969-12-31 16:00:00.000000000 -0800
++++ packages/rancher-gatekeeper-operator/charts/templates/requiredlabels.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -0,0 +1,57 @@
 +apiVersion: templates.gatekeeper.sh/v1beta1
 +kind: ConstraintTemplate
@@ -257,8 +257,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +        }
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/values.yaml packages/rancher-gatekeeper-operator/charts/values.yaml
---- packages/rancher-gatekeeper-operator/charts-original/values.yaml	2020-07-20 21:23:45.618511797 -0700
-+++ packages/rancher-gatekeeper-operator/charts/values.yaml	2020-07-20 21:18:58.371378100 -0700
+--- packages/rancher-gatekeeper-operator/charts-original/values.yaml	2020-07-21 11:08:32.000000000 -0700
++++ packages/rancher-gatekeeper-operator/charts/values.yaml	2020-07-21 11:08:23.000000000 -0700
 @@ -1,12 +1,12 @@
  replicas: 1
 -auditInterval: 60
