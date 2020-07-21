@@ -1,6 +1,17 @@
-diff -uNr packages/coredns/charts-original/templates/configmap.yaml packages/coredns/charts/templates/configmap.yaml
---- packages/coredns/charts-original/templates/configmap.yaml	1970-01-01 02:00:00.000000000 +0200
-+++ packages/coredns/charts/templates/configmap.yaml	2020-05-19 23:46:53.326737422 +0200
+diff -x '*.tgz' -x '*.lock' -uNr packages/coredns/charts-original/templates/_helpers.tpl packages/coredns/charts/templates/_helpers.tpl
+--- packages/coredns/charts-original/templates/_helpers.tpl
++++ packages/coredns/charts/templates/_helpers.tpl
+@@ -137,6 +137,7 @@
+     {{- end -}}
+ {{- end -}}
+ 
++
+ {{/*
+ Create the name of the service account to use
+ */}}
+diff -x '*.tgz' -x '*.lock' -uNr packages/coredns/charts-original/templates/configmap.yaml packages/coredns/charts/templates/configmap.yaml
+--- packages/coredns/charts-original/templates/configmap.yaml
++++ packages/coredns/charts/templates/configmap.yaml
 @@ -19,7 +19,7 @@
      {{- if .port }}:{{ .port }} {{ end -}}
      {
@@ -10,20 +21,9 @@ diff -uNr packages/coredns/charts-original/templates/configmap.yaml packages/cor
  {{ .configBlock | indent 12 }}
          }{{ end }}
        {{- end }}
-diff -uNr packages/coredns/charts-original/templates/_helpers.tpl packages/coredns/charts/templates/_helpers.tpl
---- packages/coredns/charts-original/templates/_helpers.tpl	1970-01-01 02:00:00.000000000 +0200
-+++ packages/coredns/charts/templates/_helpers.tpl	2020-05-19 23:46:53.326737422 +0200
-@@ -137,6 +137,7 @@
-     {{- end -}}
- {{- end -}}
- 
-+
- {{/*
- Create the name of the service account to use
- */}}
-diff -uNr packages/coredns/charts-original/templates/service.yaml packages/coredns/charts/templates/service.yaml
---- packages/coredns/charts-original/templates/service.yaml	1970-01-01 02:00:00.000000000 +0200
-+++ packages/coredns/charts/templates/service.yaml	2020-05-19 23:46:53.326737422 +0200
+diff -x '*.tgz' -x '*.lock' -uNr packages/coredns/charts-original/templates/service.yaml packages/coredns/charts/templates/service.yaml
+--- packages/coredns/charts-original/templates/service.yaml
++++ packages/coredns/charts/templates/service.yaml
 @@ -26,6 +26,8 @@
      app.kubernetes.io/name: {{ template "coredns.name" . }}
    {{- if .Values.service.clusterIP }}
@@ -33,9 +33,9 @@ diff -uNr packages/coredns/charts-original/templates/service.yaml packages/cored
    {{- end }}
    {{- if .Values.service.externalTrafficPolicy }}
    externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
-diff -uNr packages/coredns/charts-original/values.yaml packages/coredns/charts/values.yaml
---- packages/coredns/charts-original/values.yaml	1970-01-01 02:00:00.000000000 +0200
-+++ packages/coredns/charts/values.yaml	2020-06-03 20:25:50.581449545 +0200
+diff -x '*.tgz' -x '*.lock' -uNr packages/coredns/charts-original/values.yaml packages/coredns/charts/values.yaml
+--- packages/coredns/charts-original/values.yaml
++++ packages/coredns/charts/values.yaml
 @@ -3,8 +3,8 @@
  # Declare variables to be passed into your templates.
  
