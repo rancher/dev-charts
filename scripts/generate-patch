@@ -23,6 +23,7 @@ for f in packages/*; do
 				cp -r /tmp/tmp-charts/${subdirectory} ${f}/charts-original
 				rm -rf /tmp/tmp-charts
 			else
+				mkdir -p ${f}/charts-original
 				curl -sLf ${url} | tar xvzf - -C ${f}/charts-original --strip ${fields} ${subdirectory} > /dev/null 2>&1
 			fi
 			if [[ -d ${f}/charts ]]; then
