@@ -6,10 +6,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-logging/charts-original/Chart.
  appVersion: 3.4.0
 -description: A Helm chart to install Banzai Cloud logging-operator
 -name: logging-operator
--version: 3.4.0
 +description: A Helm chart to install Banzai Cloud logging-operator and a cluster logging pipeline.
 +name: rancher-logging
-+version: 3.4.000
+ version: 3.4.0
 +
 +annotations:
 +  catalog.rancher.io/certified: rancher
@@ -27,29 +26,6 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-logging/charts-original/values
  
  resources: {}
    # We usually recommend not to specify default resources and to leave this as a conscious
-@@ -30,7 +30,7 @@
-   #   memory: 128Mi
-   # requests:
-   #   cpu: 100m
--  #   memory: 128Mi
-+#   memory: 128Mi
- 
- nodeSelector: {}
- 
-@@ -64,10 +64,10 @@
- #  runAsUser: 1000
- #  fsGroup: 2000
- securityContext: {}
--#  allowPrivilegeEscalation: false
--#  readOnlyRootFilesystem: true
-+  #  allowPrivilegeEscalation: false
-+  #  readOnlyRootFilesystem: true
-   # capabilities:
--  #   drop: ["ALL"]
-+#   drop: ["ALL"]
- 
- ## Operator priorityClassName
- ##
 @@ -76,4 +76,14 @@
  monitoring:
    # Create a Prometheus Operator ServiceMonitor object
