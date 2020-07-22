@@ -1,11 +1,11 @@
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/Chart.yaml packages/rancher-gatekeeper-operator/charts/Chart.yaml
---- packages/rancher-gatekeeper-operator/charts-original/Chart.yaml
-+++ packages/rancher-gatekeeper-operator/charts/Chart.yaml
-@@ -1,10 +1,12 @@
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/Chart.yaml packages/rancher-gatekeeper/charts/Chart.yaml
+--- packages/rancher-gatekeeper/charts-original/Chart.yaml
++++ packages/rancher-gatekeeper/charts/Chart.yaml
+@@ -1,10 +1,15 @@
  apiVersion: v1
  description: A Helm chart for Gatekeeper
 -name: gatekeeper-operator
-+name: rancher-gatekeeper-operator
++name: rancher-gatekeeper
  keywords:
    - open policy agent
 -version: v3.1.0-beta.7
@@ -15,10 +15,13 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
    - https://github.com/open-policy-agent/gatekeeper.git
  appVersion: v3.1.0-beta.7
 +annotations:
-+  io.rancher.certified: experimental
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/helm-modifications/helm-modifications.yaml packages/rancher-gatekeeper-operator/charts/helm-modifications/helm-modifications.yaml
---- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/helm-modifications.yaml
-+++ packages/rancher-gatekeeper-operator/charts/helm-modifications/helm-modifications.yaml
++  catalog.rancher.io/certified: rancher
++  catalog.rancher.io/experimental: true
++  catalog.rancher.io/namespace: gatekeeper-system
++  catalog.rancher.io/release-name: rancher-gatekeeper
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/helm-modifications/helm-modifications.yaml packages/rancher-gatekeeper/charts/helm-modifications/helm-modifications.yaml
+--- packages/rancher-gatekeeper/charts-original/helm-modifications/helm-modifications.yaml
++++ packages/rancher-gatekeeper/charts/helm-modifications/helm-modifications.yaml
 @@ -1,61 +0,0 @@
 -apiVersion: v1
 -kind: Service
@@ -81,9 +84,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 -          image: "{{ .Values.image.repository }}:{{ .Values.image.release }}"
 -          resources: HELMSUBST_DEPLOYMENT_CONTAINER_RESOURCES
 -      nodeSelector: HELMSUBST_DEPLOYMENT_POD_SCHEDULING
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/helm-modifications/kustomization.yaml packages/rancher-gatekeeper-operator/charts/helm-modifications/kustomization.yaml
---- packages/rancher-gatekeeper-operator/charts-original/helm-modifications/kustomization.yaml
-+++ packages/rancher-gatekeeper-operator/charts/helm-modifications/kustomization.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/helm-modifications/kustomization.yaml packages/rancher-gatekeeper/charts/helm-modifications/kustomization.yaml
+--- packages/rancher-gatekeeper/charts-original/helm-modifications/kustomization.yaml
++++ packages/rancher-gatekeeper/charts/helm-modifications/kustomization.yaml
 @@ -1,9 +0,0 @@
 -commonLabels:
 -  app: '{{ template "gatekeeper-operator.name" . }}'
@@ -94,24 +97,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 -  - _temp.yaml
 -patchesStrategicMerge:
 -  - helm-modifications.yaml
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl
---- packages/rancher-gatekeeper-operator/charts-original/templates/_helpers.tpl
-+++ packages/rancher-gatekeeper-operator/charts/templates/_helpers.tpl
-@@ -42,3 +42,11 @@
- {{- end }}
- app.kubernetes.io/managed-by: {{ .Release.Service }}
- {{- end -}}
-+
-+{{- define "system_default_registry" -}}
-+{{- if .Values.global.systemDefaultRegistry -}}
-+{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
-+{{- else -}}
-+{{- "" -}}
-+{{- end -}}
-+{{- end -}}
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/allowedrepos.yaml packages/rancher-gatekeeper-operator/charts/templates/allowedrepos.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/allowedrepos.yaml
-+++ packages/rancher-gatekeeper-operator/charts/templates/allowedrepos.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/templates/allowedrepos.yaml packages/rancher-gatekeeper/charts/templates/allowedrepos.yaml
+--- packages/rancher-gatekeeper/charts-original/templates/allowedrepos.yaml
++++ packages/rancher-gatekeeper/charts/templates/allowedrepos.yaml
 @@ -0,0 +1,35 @@
 +apiVersion: templates.gatekeeper.sh/v1beta1
 +kind: ConstraintTemplate
@@ -149,9 +137,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +          msg := sprintf("container <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
 +        }
 \ No newline at end of file
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/gatekeeper.yaml packages/rancher-gatekeeper-operator/charts/templates/gatekeeper.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/gatekeeper.yaml
-+++ packages/rancher-gatekeeper-operator/charts/templates/gatekeeper.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/templates/gatekeeper.yaml packages/rancher-gatekeeper/charts/templates/gatekeeper.yaml
+--- packages/rancher-gatekeeper/charts-original/templates/gatekeeper.yaml
++++ packages/rancher-gatekeeper/charts/templates/gatekeeper.yaml
 @@ -485,7 +485,7 @@
            valueFrom:
              fieldRef:
@@ -170,9 +158,24 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
  {{ toYaml .Values.nodeSelector | indent 8 }}
        affinity:
  {{ toYaml .Values.affinity | indent 8 }}
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/job-constraints-crd.yaml packages/rancher-gatekeeper-operator/charts/templates/job-constraints-crd.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/job-constraints-crd.yaml
-+++ packages/rancher-gatekeeper-operator/charts/templates/job-constraints-crd.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/templates/_helpers.tpl packages/rancher-gatekeeper/charts/templates/_helpers.tpl
+--- packages/rancher-gatekeeper/charts-original/templates/_helpers.tpl
++++ packages/rancher-gatekeeper/charts/templates/_helpers.tpl
+@@ -42,3 +42,11 @@
+ {{- end }}
+ app.kubernetes.io/managed-by: {{ .Release.Service }}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/templates/job-constraints-crd.yaml packages/rancher-gatekeeper/charts/templates/job-constraints-crd.yaml
+--- packages/rancher-gatekeeper/charts-original/templates/job-constraints-crd.yaml
++++ packages/rancher-gatekeeper/charts/templates/job-constraints-crd.yaml
 @@ -0,0 +1,19 @@
 +apiVersion: batch/v1
 +kind: Job
@@ -194,9 +197,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +      restartPolicy: Never
 +  backoffLimit: 1
 \ No newline at end of file
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/templates/requiredlabels.yaml packages/rancher-gatekeeper-operator/charts/templates/requiredlabels.yaml
---- packages/rancher-gatekeeper-operator/charts-original/templates/requiredlabels.yaml
-+++ packages/rancher-gatekeeper-operator/charts/templates/requiredlabels.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/templates/requiredlabels.yaml packages/rancher-gatekeeper/charts/templates/requiredlabels.yaml
+--- packages/rancher-gatekeeper/charts-original/templates/requiredlabels.yaml
++++ packages/rancher-gatekeeper/charts/templates/requiredlabels.yaml
 @@ -0,0 +1,57 @@
 +apiVersion: templates.gatekeeper.sh/v1beta1
 +kind: ConstraintTemplate
@@ -256,9 +259,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-ori
 +          msg := get_message(input.parameters, def_msg)
 +        }
 \ No newline at end of file
-diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper-operator/charts-original/values.yaml packages/rancher-gatekeeper-operator/charts/values.yaml
---- packages/rancher-gatekeeper-operator/charts-original/values.yaml
-+++ packages/rancher-gatekeeper-operator/charts/values.yaml
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/values.yaml packages/rancher-gatekeeper/charts/values.yaml
+--- packages/rancher-gatekeeper/charts-original/values.yaml
++++ packages/rancher-gatekeeper/charts/values.yaml
 @@ -1,12 +1,12 @@
  replicas: 1
 -auditInterval: 60
