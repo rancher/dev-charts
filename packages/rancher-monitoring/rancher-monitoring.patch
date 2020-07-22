@@ -74,67 +74,67 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/req
 +  - name: rancher-pushprox
 +    alias: rkeControllerManager
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: rkeControllerManager.enabled
 +
 +  - name: rancher-pushprox
 +    alias: rkeScheduler
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: rkeScheduler.enabled
 +
 +  - name: rancher-pushprox
 +    alias: rkeProxy
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: rkeProxy.enabled
 +
 +  - name: rancher-pushprox
 +    alias: rkeEtcd
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: rkeEtcd.enabled
 +
 +  - name: rancher-pushprox
 +    alias: k3sControllerManager
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: k3sControllerManager.enabled
 +
 +  - name: rancher-pushprox
 +    alias: k3sScheduler
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: k3sScheduler.enabled
 +  
 +  - name: rancher-pushprox
 +    alias: k3sProxy
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: k3sProxy.enabled
 +
 +  - name: rancher-pushprox
 +    alias: kubeAdmControllerManager
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: kubeAdmControllerManager.enabled
 +
 +  - name: rancher-pushprox
 +    alias: kubeAdmScheduler
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: kubeAdmScheduler.enabled
 +
 +  - name: rancher-pushprox
 +    alias: kubeAdmProxy
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: kubeAdmProxy.enabled
 +
 +  - name: rancher-pushprox
 +    alias: kubeAdmEtcd
 +    version: 0.1.0
-+    repository: file://../../rancher-pushprox
++    repository: file://../../rancher-pushprox/charts
 +    condition: kubeAdmEtcd.enabled
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/templates/exporters/core-dns/servicemonitor.yaml packages/rancher-monitoring/charts/templates/exporters/core-dns/servicemonitor.yaml
