@@ -169,23 +169,6 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rancher-gatekeeper/rancher-gatekeeper-0.1.0.tgz
     version: 0.1.0
-  rancher-gatekeeper-operator:
-  - annotations:
-      io.rancher.certified: experimental
-    apiVersion: v1
-    appVersion: v3.1.0-beta.7
-    created: "2020-07-22T00:24:50.67057736Z"
-    description: A Helm chart for Gatekeeper
-    digest: 6115907ca120fe54ca6b6e60959303433c69277d58ccc1717a8eb9347d865bac
-    home: https://github.com/open-policy-agent/gatekeeper
-    keywords:
-    - open policy agent
-    name: rancher-gatekeeper-operator
-    sources:
-    - https://github.com/open-policy-agent/gatekeeper.git
-    urls:
-    - https://dev-charts.rancher.io/rancher-gatekeeper-operator/rancher-gatekeeper-operator-0.1.0.tgz
-    version: 0.1.0
   rancher-logging:
   - annotations:
       catalog.rancher.io/certified: rancher
