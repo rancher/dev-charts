@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-07-22T01:36:26.949814833Z"
+    created: "2020-07-22T21:38:58.922708783Z"
     description: Install Canal Network Plugin.
     digest: 536a80f13a72849bdcec79bcf163cbc2f5f2e9daf2a5aa149887af15e08d6a03
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-22T01:36:26.962056089Z"
+    created: "2020-07-22T21:38:58.925062745Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: d103497c84aeca14a7e2e5a9e0c6d0989acbb0b8242af44383e3e663ef9058c6
@@ -48,7 +48,7 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-22T01:36:26.951082011Z"
+    created: "2020-07-22T21:38:58.923852013Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 38662943bf8639f15d5a83ce20b60f826b7e126ac05ee98b40ad4f58ebff3b6d
@@ -76,7 +76,7 @@ entries:
   kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-07-22T01:36:26.964084314Z"
+    created: "2020-07-22T21:38:58.926736089Z"
     description: Install Kube Proxy.
     digest: 93b2bde5fb952678129fbd23e71e356259cc007b116f69db444ff5aadc0cba6b
     keywords:
@@ -92,7 +92,7 @@ entries:
     version: v1.18.4
   - apiVersion: v1
     appVersion: v1.18.2
-    created: "2020-07-22T01:36:26.963081352Z"
+    created: "2020-07-22T21:38:58.925912567Z"
     description: Install Kube Proxy.
     digest: 75e3807bcbcf27ab81befb5f60cc7796760cc1a734a3f665a068c414252963d3
     keywords:
@@ -109,7 +109,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-07-22T01:36:26.964907265Z"
+    created: "2020-07-22T21:38:58.927369405Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: a3f39b9501069cf2f0054db291c186262174c1054a1a9df97c37b369c9056beb
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -129,7 +129,7 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-07-22T01:36:26.967316414Z"
+    created: "2020-07-22T21:38:58.939066911Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 6778c2d16dfb0d53613ccf37db054f5d89d9b5fa41428146f7139e630204f0b4
@@ -157,7 +157,7 @@ entries:
       catalog.rancher.io/release-name: rancher-gatekeeper
     apiVersion: v1
     appVersion: v3.1.0-beta.7
-    created: "2020-07-22T01:36:26.96805816Z"
+    created: "2020-07-22T21:38:58.939626226Z"
     description: A Helm chart for Gatekeeper
     digest: bc64ee7e1c5c51cbd2bd07d6f6c60f15f1088eee096ada2470598fc2575277d1
     home: https://github.com/open-policy-agent/gatekeeper
@@ -176,7 +176,7 @@ entries:
       catalog.rancher.io/release-name: rancher-logging
     apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-07-22T01:36:26.975218402Z"
+    created: "2020-07-22T21:38:58.9462827Z"
     description: A Helm chart to install Banzai Cloud logging-operator and a cluster
       logging pipeline.
     digest: f3e5bf7b8039302dc1894cc30928c65e650c55e34707c17f3241c91854a6eb06
@@ -184,6 +184,125 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rancher-logging/rancher-logging-3.4.00000.tgz
     version: 3.4.00000
+  rancher-monitoring:
+  - annotations:
+      catalog.rancher.io/certified: rancher
+      catalog.rancher.io/namespace: monitoring-system
+      catalog.rancher.io/release-name: rancher-monitoring
+    apiVersion: v1
+    appVersion: 0.38.1
+    created: "2020-07-22T21:38:58.973590414Z"
+    dependencies:
+    - condition: kubeStateMetrics.enabled
+      name: kube-state-metrics
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 2.8.*
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 1.10.*
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 5.3.*
+    - condition: prometheus-adapter.enabled
+      name: prometheus-adapter
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 2.4.*
+    - alias: rkeControllerManager
+      condition: rkeControllerManager.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: rkeScheduler
+      condition: rkeScheduler.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: rkeProxy
+      condition: rkeProxy.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: rkeEtcd
+      condition: rkeEtcd.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: k3sControllerManager
+      condition: k3sControllerManager.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: k3sScheduler
+      condition: k3sScheduler.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: k3sProxy
+      condition: k3sProxy.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: kubeAdmControllerManager
+      condition: kubeAdmControllerManager.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: kubeAdmScheduler
+      condition: kubeAdmScheduler.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: kubeAdmProxy
+      condition: kubeAdmProxy.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    - alias: kubeAdmEtcd
+      condition: kubeAdmEtcd.enabled
+      name: rancher-pushprox
+      repository: file://../../rancher-pushprox/charts
+      version: 0.1.0
+    description: A Rancher chart that modifies the upstream Prometheus Operator chart,
+      which provides easy monitoring definitions for Kubernetes services and the deployment
+      and management of Prometheus instances, and enables Prometheus Adapter on a
+      default Prometheus instance.
+    digest: f9c4cca6b11e36afb91dd996af267c7c07022ac6684f71971edb01a5e4472673
+    home: https://github.com/coreos/prometheus-operator
+    icon: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
+    keywords:
+    - operator
+    - prometheus
+    maintainers:
+    - name: vsliouniaev
+    - name: bismarck
+    - email: gianrubio@gmail.com
+      name: gianrubio
+    name: rancher-monitoring
+    sources:
+    - https://github.com/coreos/kube-prometheus
+    - https://github.com/coreos/prometheus-operator
+    - https://coreos.com/operators/prometheus
+    urls:
+    - https://dev-charts.rancher.io/rancher-monitoring/rancher-monitoring-8.16.100.tgz
+    version: 8.16.100
+  rancher-pushprox:
+  - annotations:
+      catalog.rancher.io/certified: rancher
+      catalog.rancher.io/namespace: monitoring-system
+      catalog.rancher.io/release-name: rancher-pushprox
+    apiVersion: v1
+    appVersion: 0.1.0
+    created: "2020-07-22T21:38:58.97419083Z"
+    description: A Rancher chart based on PushProx that sets up a deployment of the
+      PushProx proxy and a DaemonSet of PushProx clients on a Kubernetes cluster.
+    digest: cfee4f0eb487e83b7d0732cd6e917a9725698fecd6b216233caf857124a0acdc
+    name: rancher-pushprox
+    type: application
+    urls:
+    - https://dev-charts.rancher.io/rancher-pushprox/rancher-pushprox-0.1.0.tgz
+    version: 0.1.0
   rio:
   - annotations:
       catalog.rancher.io/certified: rancher
@@ -191,7 +310,7 @@ entries:
       catalog.rancher.io/release-name: rio
     apiVersion: v1
     appVersion: 0.8.0-rc1
-    created: "2020-07-22T01:36:26.975705633Z"
+    created: "2020-07-22T21:38:58.974745245Z"
     description: The application deployment engine for Kubernetes
     digest: 452712eb50b72f5a6631ee1ebdb932127c9856948cf7d24fe14f74f7bfd1da5f
     home: https://rio.io
@@ -199,4 +318,4 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rio/rio-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-22T01:36:26.949003582Z"
+generated: "2020-07-22T21:38:58.921948863Z"
