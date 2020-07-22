@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-07-21T20:42:24.48556231Z"
+    created: "2020-07-22T00:24:50.660938329Z"
     description: Install Canal Network Plugin.
     digest: 536a80f13a72849bdcec79bcf163cbc2f5f2e9daf2a5aa149887af15e08d6a03
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-21T20:42:24.48875731Z"
+    created: "2020-07-22T00:24:50.663398637Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: d103497c84aeca14a7e2e5a9e0c6d0989acbb0b8242af44383e3e663ef9058c6
@@ -48,7 +48,7 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-21T20:42:24.48718761Z"
+    created: "2020-07-22T00:24:50.662207933Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 38662943bf8639f15d5a83ce20b60f826b7e126ac05ee98b40ad4f58ebff3b6d
@@ -76,7 +76,7 @@ entries:
   kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-07-21T20:42:24.49211071Z"
+    created: "2020-07-22T00:24:50.666222446Z"
     description: Install Kube Proxy.
     digest: 93b2bde5fb952678129fbd23e71e356259cc007b116f69db444ff5aadc0cba6b
     keywords:
@@ -92,7 +92,7 @@ entries:
     version: v1.18.4
   - apiVersion: v1
     appVersion: v1.18.2
-    created: "2020-07-21T20:42:24.49028081Z"
+    created: "2020-07-22T00:24:50.665002242Z"
     description: Install Kube Proxy.
     digest: 75e3807bcbcf27ab81befb5f60cc7796760cc1a734a3f665a068c414252963d3
     keywords:
@@ -109,7 +109,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-07-21T20:42:24.49292441Z"
+    created: "2020-07-22T00:24:50.66752265Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: a3f39b9501069cf2f0054db291c186262174c1054a1a9df97c37b369c9056beb
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -129,7 +129,7 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-07-21T20:42:24.49553281Z"
+    created: "2020-07-22T00:24:50.670022458Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 6778c2d16dfb0d53613ccf37db054f5d89d9b5fa41428146f7139e630204f0b4
@@ -154,7 +154,7 @@ entries:
       io.rancher.certified: experimental
     apiVersion: v1
     appVersion: v3.1.0-beta.7
-    created: "2020-07-21T20:42:24.49607911Z"
+    created: "2020-07-22T00:24:50.67057736Z"
     description: A Helm chart for Gatekeeper
     digest: 6115907ca120fe54ca6b6e60959303433c69277d58ccc1717a8eb9347d865bac
     home: https://github.com/open-policy-agent/gatekeeper
@@ -166,10 +166,25 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rancher-gatekeeper-operator/rancher-gatekeeper-operator-0.1.0.tgz
     version: 0.1.0
+  rancher-logging:
+  - annotations:
+      catalog.rancher.io/certified: rancher
+      catalog.rancher.io/namespace: logging-system
+      catalog.rancher.io/release-name: rancher-logging
+    apiVersion: v1
+    appVersion: 3.4.0
+    created: "2020-07-22T00:24:50.675542976Z"
+    description: A Helm chart to install Banzai Cloud logging-operator and a cluster
+      logging pipeline.
+    digest: f3e5bf7b8039302dc1894cc30928c65e650c55e34707c17f3241c91854a6eb06
+    name: rancher-logging
+    urls:
+    - https://dev-charts.rancher.io/rancher-logging/rancher-logging-3.4.00000.tgz
+    version: 3.4.00000
   rio:
   - apiVersion: v1
     appVersion: 0.8.0-rc1
-    created: "2020-07-21T20:42:24.49652041Z"
+    created: "2020-07-22T00:24:50.676102977Z"
     description: The application deployment engine for Kubernetes
     digest: 73ddd91cf3eaf8f4eee59a137cb3112a8fc5553b9cf383e7653a6a8fa6cf108e
     home: https://rio.io
@@ -177,4 +192,4 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rio/rio-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-21T20:42:24.467579909Z"
+generated: "2020-07-22T00:24:50.651096398Z"
