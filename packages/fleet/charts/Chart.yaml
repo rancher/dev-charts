@@ -1,0 +1,11 @@
+apiVersion: v2
+name: fleet
+version: v0.2.0
+appVersion: v0.2.0
+icon: https://raw.githubusercontent.com/StrongMonkey/fleet/master/fleet.svg
+description: Managing fleets of Kubernetes clusters
+home: https://github.com/rancher/fleet
+annotations:
+  catalog.rancher.io/certified: rancher
+  catalog.rancher.io/namespace: fleet-system
+  catalog.rancher.io/release-name: fleet-manager
