@@ -183,35 +183,6 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rancher-istio/rancher-istio-installer-1.6.500.tgz
     version: 1.6.500
-  rancher-logging:
-  - annotations:
-      catalog.rancher.io/certified: rancher
-      catalog.rancher.io/namespace: logging-system
-      catalog.rancher.io/release-name: rancher-logging
-    apiVersion: v1
-    appVersion: 3.4.0
-    created: "2020-07-23T20:36:28.604125641Z"
-    description: A Helm chart to install Banzai Cloud logging-operator and a cluster
-      logging pipeline.
-    digest: 95b62c41a46e98e43ad8fdddf833fb40069a167b0648e5c9f3ee6cd2ef601191
-    name: rancher-logging
-    urls:
-    - https://dev-charts.rancher.io/rancher-logging/rancher-logging-3.4.001.tgz
-    version: 3.4.001
-  - annotations:
-      catalog.rancher.io/certified: rancher
-      catalog.rancher.io/namespace: logging-system
-      catalog.rancher.io/release-name: rancher-logging
-    apiVersion: v1
-    appVersion: 3.4.0
-    created: "2020-07-23T20:36:28.598591131Z"
-    description: A Helm chart to install Banzai Cloud logging-operator and a cluster
-      logging pipeline.
-    digest: f3e5bf7b8039302dc1894cc30928c65e650c55e34707c17f3241c91854a6eb06
-    name: rancher-logging
-    urls:
-    - https://dev-charts.rancher.io/rancher-logging/rancher-logging-3.4.00000.tgz
-    version: 3.4.00000
   rancher-monitoring:
   - annotations:
       catalog.rancher.io/certified: rancher
