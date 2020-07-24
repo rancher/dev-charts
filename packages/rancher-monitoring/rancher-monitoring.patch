@@ -17278,6 +17278,27 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/tem
 ----
 -{{- end }}
 -{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/templates/validate_crds_installed.yaml packages/rancher-monitoring/charts/templates/validate_crds_installed.yaml
+--- packages/rancher-monitoring/charts-original/templates/validate_crds_installed.yaml
++++ packages/rancher-monitoring/charts/templates/validate_crds_installed.yaml
+@@ -0,0 +1,17 @@
++{{- $found := dict -}}
++{{- set $found "monitoring.coreos.com/v1/Alertmanager" false -}}
++{{- set $found "monitoring.coreos.com/v1/PodMonitor" false -}}
++{{- set $found "monitoring.coreos.com/v1/Prometheus" false -}}
++{{- set $found "monitoring.coreos.com/v1/ServiceMonitor" false -}}
++{{- set $found "monitoring.coreos.com/v1/ThanosRuler" false -}}
++{{- range .Capabilities.APIVersions -}}
++  {{- if hasKey $found (toString .) -}}
++    {{- set $found (toString .) true -}}
++  {{- end -}}
++{{- end -}}
++{{- range $_, $exists := $found -}}
++  {{- if (eq $exists false) -}}
++    {{- required "Required CRDs are missing. Please install the rancher-monitoring-crd chart before installing this chart." "" -}}
++  {{- end -}}
++{{- end -}}
++
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/values.yaml packages/rancher-monitoring/charts/values.yaml
 --- packages/rancher-monitoring/charts-original/values.yaml
 +++ packages/rancher-monitoring/charts/values.yaml
