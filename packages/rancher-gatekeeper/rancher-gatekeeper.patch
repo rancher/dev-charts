@@ -15,10 +15,10 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/Cha
    - https://github.com/open-policy-agent/gatekeeper.git
  appVersion: v3.1.0-beta.7
 +annotations:
-+  catalog.rancher.io/certified: rancher
-+  catalog.rancher.io/experimental: true
-+  catalog.rancher.io/namespace: gatekeeper-system
-+  catalog.rancher.io/release-name: rancher-gatekeeper
++  catalog.cattle.io/certified: rancher
++  catalog.cattle.io/experimental: true
++  catalog.cattle.io/namespace: gatekeeper-system
++  catalog.cattle.io/release-name: rancher-gatekeeper
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-gatekeeper/charts-original/helm-modifications/helm-modifications.yaml packages/rancher-gatekeeper/charts/helm-modifications/helm-modifications.yaml
 --- packages/rancher-gatekeeper/charts-original/helm-modifications/helm-modifications.yaml
 +++ packages/rancher-gatekeeper/charts/helm-modifications/helm-modifications.yaml
