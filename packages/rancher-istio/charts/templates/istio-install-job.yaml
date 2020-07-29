@@ -19,16 +19,10 @@ spec:
           env:
           - name: RELEASE_NAME
             value: {{ .Release.Name }}
-          - name: REVISION_NAME
-            value: {{ .Chart.Version }}
           {{- if .Values.revision }}
           - name: CANARY_REVISION
             value: {{ .Values.revision }}
           {{- end }}
-          {{- if .Values.overlayFile }}
-          - name: APPLY_OVERLAY_CONFIG
-            value: true
-          {{ end }}
           command: ["/bin/sh","-c"]
           args: ["/usr/local/app/scripts/run.sh"]
           volumeMounts:
@@ -39,7 +33,7 @@ spec:
           - name: overlay-volume
             mountPath: /app/overlay-config.yaml
             subPath: overlay-config.yaml
-          {{ end }}
+          {{- end }}
       volumes:
         - name: config-volume
           configMap:
@@ -48,6 +42,6 @@ spec:
         - name: overlay-volume
           configMap:
             name: istio-installer-overlay
-        {{ end }}
+        {{- end }}
       serviceAccountName: istio-installer
       restartPolicy: Never
