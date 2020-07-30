@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fleet-manager
+  namespace: fleet-system
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleet-manager
+  namespace: fleet-system
+spec:
+  selector:
+    matchLabels:
+      app: fleet-manager
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fleet-manager
+    spec:
+      containers:
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: rancher/fleet:v0.1.0-rc6
+        name: fleet-manager
+        resources: {}
+      serviceAccountName: fleet-manager
+---
+apiVersion: v1
+data:
+  config: |
+    {
+      "Namespace": "fleet-system",
+      "ManagerImage": "rancher/fleet:v0.1.0-rc6",
+      "AgentImage": "rancher/fleet-agent:v0.1.0-rc6",
+      "CRDsOnly": false
+    }
+kind: ConfigMap
+metadata:
+  name: fleet-manager
+  namespace: fleet-system
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: contents.fleet.cattle.io
+spec:
+  group: fleet.cattle.io
+  names:
+    kind: Content
+    plural: contents
+  scope: Cluster
+  validation:
+    openAPIV3Schema:
+      properties:
+        content:
+          type: string
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: fleet-system-fleet-manager-role
+rules:
+- apiGroups:
+  - fleet.cattle.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - serviceaccounts
+  verbs:
+  - '*'
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - '*'
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - list
+  - watch
+  - get
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
+  - clusterrolebindings
+  - roles
+  - rolebindings
+  verbs:
+  - '*'
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: fleet-system-fleet-manager-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: fleet-system-fleet-manager-role
+subjects:
+- kind: ServiceAccount
+  name: fleet-manager
+  namespace: fleet-system
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: fleet-system-fleet-manager-role
+  namespace: fleet-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - '*'
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: fleet-system-fleet-manager-role-binding
+  namespace: fleet-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: fleet-system-fleet-manager-role
+subjects:
+- kind: ServiceAccount
+  name: fleet-manager
+  namespace: fleet-system
