@@ -3,7 +3,7 @@ entries:
   canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-07-29T20:35:13.290408863Z"
+    created: "2020-07-30T23:01:19.607202366Z"
     description: Install Canal Network Plugin.
     digest: 536a80f13a72849bdcec79bcf163cbc2f5f2e9daf2a5aa149887af15e08d6a03
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-29T20:35:13.301897186Z"
+    created: "2020-07-30T23:01:19.609646966Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: d103497c84aeca14a7e2e5a9e0c6d0989acbb0b8242af44383e3e663ef9058c6
@@ -48,7 +48,7 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-07-29T20:35:13.291308457Z"
+    created: "2020-07-30T23:01:19.608427366Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 38662943bf8639f15d5a83ce20b60f826b7e126ac05ee98b40ad4f58ebff3b6d
@@ -80,10 +80,10 @@ entries:
       catalog.cattle.io/release-name: enterprise-cluster-manager-feature
     apiVersion: v1
     appVersion: 0.1.100
-    created: "2020-07-29T20:35:13.302105785Z"
+    created: "2020-07-30T23:01:19.609889005Z"
     description: Install Enterprise Cluster Manager feature to manage Kubernetes clusters
       across providers.
-    digest: 710b0d61b1254834d023124c463714bfa78584dd1f1fc8a1b4930d6e0d2699d6
+    digest: b858a1c049e6b9c6a0b449188a89401435a936b3194129cab229c4aa9652c151
     home: https://rancher.com
     icon: https://github.com/rancher/ui/blob/master/public/assets/images/logos/welcome-cow.svg
     keywords:
@@ -98,7 +98,7 @@ entries:
   kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-07-29T20:35:13.303855773Z"
+    created: "2020-07-30T23:01:19.660441167Z"
     description: Install Kube Proxy.
     digest: 93b2bde5fb952678129fbd23e71e356259cc007b116f69db444ff5aadc0cba6b
     keywords:
@@ -114,7 +114,7 @@ entries:
     version: v1.18.4
   - apiVersion: v1
     appVersion: v1.18.2
-    created: "2020-07-29T20:35:13.30287898Z"
+    created: "2020-07-30T23:01:19.610934376Z"
     description: Install Kube Proxy.
     digest: 75e3807bcbcf27ab81befb5f60cc7796760cc1a734a3f665a068c414252963d3
     keywords:
@@ -131,7 +131,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-07-29T20:35:13.304465669Z"
+    created: "2020-07-30T23:01:19.661826793Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: a3f39b9501069cf2f0054db291c186262174c1054a1a9df97c37b369c9056beb
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -151,7 +151,7 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-07-29T20:35:13.306475856Z"
+    created: "2020-07-30T23:01:19.666440347Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 6778c2d16dfb0d53613ccf37db054f5d89d9b5fa41428146f7139e630204f0b4
@@ -179,7 +179,7 @@ entries:
       catalog.cattle.io/release-name: rancher-gatekeeper
     apiVersion: v1
     appVersion: v3.1.0-beta.7
-    created: "2020-07-29T20:35:13.307546348Z"
+    created: "2020-07-30T23:01:19.668124122Z"
     description: A Helm chart for Gatekeeper
     digest: d74c134ca13b939d3b0a3d5901ee1ed2eacf0e8a5c30968a9f6cee61be942051
     home: https://github.com/open-policy-agent/gatekeeper
@@ -214,8 +214,23 @@ entries:
       catalog.cattle.io/release-name: rancher-istio
       catalog.cattle.io/ui-component: istio
     apiVersion: v1
+    appVersion: 1.6.6
+    created: "2020-07-30T23:01:19.672042263Z"
+    description: Helm chart for installing istio components with the istioctl
+    digest: 98106f0453cd9c1254ad480466e03ce4e017862bdfb2ab1bc85632e665fe4829
+    icon: https://dev-charts.rancher.io/logos/istio.svg
+    name: rancher-istio-installer
+    urls:
+    - https://dev-charts.rancher.io/rancher-istio/rancher-istio-installer-1.6.600.tgz
+    version: 1.6.600
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/namespace: istio-system
+      catalog.cattle.io/release-name: rancher-istio
+      catalog.cattle.io/ui-component: istio
+    apiVersion: v1
     appVersion: 1.6.5
-    created: "2020-07-29T20:35:13.309040338Z"
+    created: "2020-07-30T23:01:19.67129104Z"
     description: Helm chart for installing istio components with the istioctl
     digest: 46d2ec838ea86a3963c5a01c4d20c1f60d9dae9c5b54c43e9092f4eee74e1656
     name: rancher-istio-installer
@@ -230,7 +245,7 @@ entries:
       catalog.cattle.io/release-name: rancher-logging
     apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-07-29T20:35:13.315232697Z"
+    created: "2020-07-30T23:01:19.679110918Z"
     description: A Helm chart to install Banzai Cloud logging-operator and a cluster
       logging pipeline.
     digest: 2f1ba6dc21c9a7f3d5f8a7314054acd25cbbc2747d1277d436d454577b1d9f5e
@@ -247,7 +262,7 @@ entries:
       catalog.cattle.io/ui-component: monitoring
     apiVersion: v1
     appVersion: 0.38.1
-    created: "2020-07-29T20:35:13.344134103Z"
+    created: "2020-07-30T23:01:19.716217682Z"
     dependencies:
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
@@ -350,7 +365,7 @@ entries:
       catalog.rancher.io/release-name: rancher-pushprox
     apiVersion: v1
     appVersion: 0.1.0
-    created: "2020-07-29T20:35:13.344704099Z"
+    created: "2020-07-30T23:01:19.716994709Z"
     description: A Rancher chart based on PushProx that sets up a deployment of the
       PushProx proxy and a DaemonSet of PushProx clients on a Kubernetes cluster.
     digest: cfee4f0eb487e83b7d0732cd6e917a9725698fecd6b216233caf857124a0acdc
@@ -366,7 +381,7 @@ entries:
       catalog.cattle.io/release-name: rio
     apiVersion: v1
     appVersion: 0.8.0-rc1
-    created: "2020-07-29T20:35:13.345499594Z"
+    created: "2020-07-30T23:01:19.717626212Z"
     description: The application deployment engine for Kubernetes
     digest: 8a1101a3ed98f3e8f42f1576ff439e0ff86830e4291077f4f30badca3737d33e
     home: https://rio.io
@@ -375,4 +390,4 @@ entries:
     urls:
     - https://dev-charts.rancher.io/rio/rio-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-29T20:35:13.289660968Z"
+generated: "2020-07-30T23:01:19.606242609Z"
