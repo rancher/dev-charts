@@ -1,3 +1,5 @@
+**THIS HAS MOVED TO THE OFFICIAL [CHARTS REPO](https://github.com/rancher/charts) on the `gh-pages` branch.**
+
 ## dev-charts
 
 This is an experimental project to automate system charts and adding overlays files on top of it.
