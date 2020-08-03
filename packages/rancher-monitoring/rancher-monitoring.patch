@@ -1,7 +1,7 @@
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/Chart.yaml packages/rancher-monitoring/charts/Chart.yaml
 --- packages/rancher-monitoring/charts-original/Chart.yaml
 +++ packages/rancher-monitoring/charts/Chart.yaml
-@@ -1,7 +1,11 @@
+@@ -1,22 +1,26 @@
  apiVersion: v1
  appVersion: 0.38.1
 -description: Provides easy monitoring definitions for Kubernetes services, and deployment
@@ -15,15 +15,31 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/Cha
  engine: gotpl
  home: https://github.com/coreos/prometheus-operator
  icon: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
-@@ -13,7 +17,7 @@
- - name: bismarck
- - email: gianrubio@gmail.com
-   name: gianrubio
+ keywords:
+-- operator
+-- prometheus
++  - operator
++  - prometheus
+ maintainers:
+-- name: vsliouniaev
+-- name: bismarck
+-- email: gianrubio@gmail.com
+-  name: gianrubio
 -name: prometheus-operator
++  - name: vsliouniaev
++  - name: bismarck
++  - email: gianrubio@gmail.com
++    name: gianrubio
 +name: rancher-monitoring
  sources:
- - https://github.com/coreos/kube-prometheus
- - https://github.com/coreos/prometheus-operator
+-- https://github.com/coreos/kube-prometheus
+-- https://github.com/coreos/prometheus-operator
+-- https://coreos.com/operators/prometheus
++  - https://github.com/coreos/kube-prometheus
++  - https://github.com/coreos/prometheus-operator
++  - https://coreos.com/operators/prometheus
+ tillerVersion: '>=2.12.0'
+ version: 8.16.1
 diff -x '*.tgz' -x '*.lock' -uNr packages/rancher-monitoring/charts-original/README.md packages/rancher-monitoring/charts/README.md
 --- packages/rancher-monitoring/charts-original/README.md
 +++ packages/rancher-monitoring/charts/README.md
